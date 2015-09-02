@@ -58,8 +58,9 @@ def test_temp():
 		process = Popen(["python", "temperatureconverter.py",str(i)], stdout=PIPE)
 		out = process.communicate()[0].lower()
 		print out.strip()
-		celsius="{0:.1f} celsius".format((i-32)/1.8)
-		if celsius not in out:
+		words=out.split()
+		celsius="{0:.1f}".format((i-32)/1.8)
+		if words.count(celsius)==0 or words.index(celsius)<2:
 			print "Failed at "+out
 			tests["temperatureconverter"]=0
 			return 1
